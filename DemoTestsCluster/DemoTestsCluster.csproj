@@ -43,14 +43,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\ClientExecutor.cs" />
+    <Compile Include="Core\Queues\SortedQueue.cs" />
+    <Compile Include="Core\Queues\SortedQueueBase.cs" />
     <Compile Include="Core\SharedHelper.cs" />
-    <Compile Include="Core\TestQueueWrapper.cs" />
+    <Compile Include="Core\Queues\ConcurrentSortedQueue.cs" />
     <Compile Include="Core\TestManager.cs" />
     <Compile Include="Core\Comparison Strategy\DefaultTestComparer.cs" />
     <Compile Include="Core\ExecutionUrl.cs" />
     <Compile Include="Core\Interfaces\IClientExecutor.cs" />
-    <Compile Include="Core\Interfaces\ITMTest.cs" />
-    <Compile Include="Core\TMTest.cs" />
+    <Compile Include="Core\Interfaces\ITest.cs" />
+    <Compile Include="Core\DefaultTest.cs" />
     <Compile Include="Core\TestCategory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,7 +1,10 @@
-﻿using TeamMate.ClusterTestManager.Core.Interfaces;
+﻿using TeamMate.AutomationCluster.Core.Interfaces;
 
-namespace TeamMate.ClusterTestManager.Core
+namespace TeamMate.AutomationCluster.Core
 {
+    /// <summary>
+    /// Represents a client that can run test
+    /// </summary>
     public class ClientExecutor : IClientExecutor
     {
         public string Name { get; private set; }

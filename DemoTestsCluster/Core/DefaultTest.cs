@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TeamMate.ClusterTestManager.Core.Interfaces;
+using TeamMate.AutomationCluster.Core.Interfaces;
 
-namespace TeamMate.ClusterTestManager.Core
+namespace TeamMate.AutomationCluster.Core
 {
-    public class TMTest : ITMTest
+    /// <summary>
+    /// Represents a test that can be executed
+    /// </summary>
+    public class DefaultTest : ITest
     {
         public string Name { get; private set; }
 
@@ -19,7 +22,7 @@ namespace TeamMate.ClusterTestManager.Core
 
         public short NumberFailed { get; set; }
 
-        public TMTest(string name, int duration, bool parallelizable, bool readableWritable, short numberFailed)
+        public DefaultTest(string name, int duration, bool parallelizable, bool readableWritable, short numberFailed)
         {
             Name = name;
             Duration = duration;
@@ -28,7 +31,7 @@ namespace TeamMate.ClusterTestManager.Core
             NumberFailed = numberFailed;
         }
 
-        public TMTest(string name, bool parallelizable, bool readableWritable)
+        public DefaultTest(string name, bool parallelizable, bool readableWritable)
             : this(name, 0, parallelizable, readableWritable, 0)
         {
 
@@ -36,7 +39,7 @@ namespace TeamMate.ClusterTestManager.Core
 
         public override bool Equals(object obj)
         {
-            return obj != null && Name == ((TMTest)obj).Name;
+            return obj != null && Name == ((DefaultTest)obj).Name;
         }
 
         public override int GetHashCode()

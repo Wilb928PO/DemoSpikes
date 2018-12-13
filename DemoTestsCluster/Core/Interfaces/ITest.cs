@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
-
-namespace TeamMate.ClusterTestManager.Core.Interfaces
+﻿
+namespace TeamMate.AutomationCluster.Core.Interfaces
 {
-    public interface ITMTest
+    /// <summary>
+    /// Represents an interface test that can be executed
+    /// </summary>
+    public interface ITest
     {
         string Name { get; }
 
