@@ -6,12 +6,17 @@ namespace TeamMate.ClusterTestManager.Core
 {
     public class TestQueueWrapper<T> where T : class
     {
-        private SortedSet<T> tests;
+        private LinkedList<T> tests;
+
+        public IComparer<T> Comparer { get; set; }
 
         public TestQueueWrapper(IComparer<T> comparer, IEnumerable<T> collection = null)
         {
-            tests = collection == null ? new SortedSet<T>(comparer)
-                : new SortedSet<T>(collection, comparer);
+            //This call is to verify that instance is not null
+            comparer.ToString();
+
+            Comparer = comparer;
+            tests = collection != null ? new LinkedList<T>(collection) : new LinkedList<T>();
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -33,14 +38,32 @@ namespace TeamMate.ClusterTestManager.Core
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public bool TryPush(T test)
+        public void Push(T test)
         {
-            return tests.Add(test);
+            if (tests.Count > 0)
+            {
+                var iterador = tests.First;
+                var node = new LinkedListNode<T>(test);
+                do
+                {
+                    if (Comparer.Compare(test, iterador.Value) > 0)
+                    {
+                        tests.AddBefore(iterador, node);
+                        return;
+                    }
+                    iterador = iterador.Next;
+                } while (iterador != null);
+                tests.AddLast(node);
+            }
+            else
+            {
+                tests.AddFirst(test);
+            }
         }
-        
+
         protected T PeekMask()
         {
-            return tests.Max;
+            return tests.First.Value;
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -50,10 +73,11 @@ namespace TeamMate.ClusterTestManager.Core
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public bool TryPop(out T test)
+        public T Pop()
         {
-            test = PeekMask();
-            return tests.Remove(test);
+            T test = PeekMask();
+            tests.RemoveFirst();
+            return test;
         }
     }
 }

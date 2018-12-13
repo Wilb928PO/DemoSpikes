@@ -9,12 +9,12 @@ namespace TeamMate.ClusterTestManager.Core.Interfaces
 
     public interface IClientExecutor
     {
-        string Name { get; set; }
+        string Name { get; }
 
-        string Hostname { get; set; }
+        string Hostname { get; }
 
-        bool VirtualMachine { get; set; }
+        bool VirtualMachine { get; }
 
-        short NumberParallelizableTests { get; set; }
+        short NumberParallelizableTests { get; }
     }
 }

@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace TeamMate.ClusterTestManager.Core.Interfaces
 {
     public interface ITMTest
     {
-        string Name { get; set; }
+        string Name { get; }
 
         int Duration { get; set; }
 
-        bool Parallelizable { get; set; }
+        bool Parallelizable { get; }
 
-        bool ReadableWritable { get; set; }
+        bool ReadableWritable { get; }
 
         short NumberFailed { get; set; }
 
-        List<TestCategory> Categories { get; set; }
+        //List<TestCategory> Categories { get; set; }
     }
 }

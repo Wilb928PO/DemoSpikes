@@ -4,12 +4,12 @@ namespace TeamMate.ClusterTestManager.Core
 {
     public class ClientExecutor : IClientExecutor
     {
-        public string Name { get; set; }
+        public string Name { get; private set; }
 
-        public string Hostname { get; set; }
+        public string Hostname { get; private set; }
 
-        public bool VirtualMachine { get; set; }
+        public bool VirtualMachine { get; private set; }
 
-        public short NumberParallelizableTests { get; set; }
+        public short NumberParallelizableTests { get; private set; }
     }
 }

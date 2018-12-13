@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using TeamMate.ClusterTestManager.Core.Interfaces;
-//using System.Linq;
+using TeamMate.ClusterTestManager.Core.ComparisonStrategy;
+using System.Linq;
 
 namespace TeamMate.ClusterTestManager.Core
 {
-    public abstract class TestManager
+    public class TestManager
     {
         public int LimitNumerFailed { get; set; }
 
@@ -13,5 +14,10 @@ namespace TeamMate.ClusterTestManager.Core
         public List<IClientExecutor> ClientExecutors { get; set; }
 
         public TestQueueWrapper<ITMTest> TestsQueueWrapper { get; set; }
+
+        public TestManager()
+        {
+            TestsQueueWrapper = new TestQueueWrapper<ITMTest>(new DefaultTestComparer());
+        }
     }
 }
