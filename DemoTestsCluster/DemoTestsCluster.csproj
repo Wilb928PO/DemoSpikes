@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{124EFBAC-5F30-4338-B0E3-0C4832A0E684}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>TeamMate.ClusterTestManager</RootNamespace>
-    <AssemblyName>TeamMate.ClusterTestManager</AssemblyName>
+    <RootNamespace>TeamMate.AutomationCluster</RootNamespace>
+    <AssemblyName>TeamMate.AutomationCluster</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,8 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\ClientExecutor.cs" />
+    <Compile Include="Core\Interfaces\ISortedQueue.cs" />
     <Compile Include="Core\Queues\SortedQueue.cs" />
-    <Compile Include="Core\Queues\SortedQueueBase.cs" />
     <Compile Include="Core\SharedHelper.cs" />
     <Compile Include="Core\Queues\ConcurrentSortedQueue.cs" />
     <Compile Include="Core\TestManager.cs" />

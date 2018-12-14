@@ -8,16 +8,26 @@ namespace TeamMate.AutomationCluster.Core.Queues
     /// Represents safe sorted queue structure to be handled by threads
     /// </summary>
     /// <typeparam name="T">Specifies the element type of queue</typeparam>
-    public sealed class ConcurrentSortedQueue<T> : SortedQueueBase<T> where T : class
+    public sealed class ConcurrentSortedQueue<T> : ISortedQueue<T>
     {
+        private SortedQueue<T> delegateQueue;
+
+        public IComparer<T> Comparer
+        {
+            get
+            {
+                return delegateQueue.Comparer;
+            }
+        }
+
         /// <summary>
         /// Creates a instance of the class
         /// </summary>
         /// <param name="comparer">It's comparison strategy</param>
         /// <param name="collection">collection of values</param>
         public ConcurrentSortedQueue(IComparer<T> comparer, IEnumerable<T> collection = null)
-            : base(comparer, collection)
         {
+            delegateQueue = new SortedQueue<T>(comparer, collection);            
         }
 
         /// <summary>
@@ -25,9 +35,9 @@ namespace TeamMate.AutomationCluster.Core.Queues
         /// </summary>
         /// <returns>true if the queue has values</returns>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public override bool HasValues()
+        public bool HasValues()
         {
-            return base.HasValues();
+            return delegateQueue.HasValues();
         }
 
         /// <summary>
@@ -35,9 +45,9 @@ namespace TeamMate.AutomationCluster.Core.Queues
         /// </summary>
         /// <returns>true if the queue is empty</returns>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public override bool IsEmpty()
+        public bool IsEmpty()
         {
-            return base.IsEmpty();
+            return delegateQueue.IsEmpty();
         }
 
         /// <summary>
@@ -45,9 +55,9 @@ namespace TeamMate.AutomationCluster.Core.Queues
         /// </summary>
         /// <returns>return the count of values in the queue</returns>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public override int Count()
+        public int Count()
         {
-            return base.Count();
+            return delegateQueue.Count();
         }
 
         /// <summary>
@@ -55,9 +65,9 @@ namespace TeamMate.AutomationCluster.Core.Queues
         /// </summary>
         /// <param name="value">The value to be added</param>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public override void Push(T value)
+        public void Push(T value)
         {
-            base.Push(value);
+            delegateQueue.Push(value);
         }
 
         /// <summary>
@@ -65,9 +75,9 @@ namespace TeamMate.AutomationCluster.Core.Queues
         /// </summary>
         /// <returns>the first value in the queue</returns>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public override T Peek()
+        public T Peek()
         {
-            return PeekMask();
+            return delegateQueue.Peek();
         }
 
         /// <summary>
@@ -75,9 +85,9 @@ namespace TeamMate.AutomationCluster.Core.Queues
         /// </summary>
         /// <returns>the first value in the queue</returns>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public override T Pop()
+        public T Pop()
         {
-            return base.Pop();
+            return delegateQueue.Pop();
         }
     }
 }

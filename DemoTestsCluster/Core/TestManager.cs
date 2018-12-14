@@ -18,7 +18,7 @@ namespace TeamMate.AutomationCluster.Core
 
         public List<IClientExecutor> ClientExecutors { get; private set; }
 
-        public SortedQueueBase<ITest> Queue { get; private set; }
+        public ISortedQueue<ITest> Queue { get; private set; }
 
         /// <summary>
         /// Creates a instance of the class

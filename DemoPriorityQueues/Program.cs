@@ -56,7 +56,8 @@ namespace DemoStructure
             foreach (Thread client in threads) {
                 client.Start();
             }
-            Thread.Sleep(30000);
+
+            Console.In.ReadLine();
         }
     }
 }
